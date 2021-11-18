@@ -36,6 +36,10 @@ Things you may want to cover:
 | sex_id        | integer | null: false                |
 | age_id        | integer | null: false                |
 
+## Association
+
+has_many :excuses
+
 
 ## excuses テーブル
 
@@ -47,6 +51,12 @@ Things you may want to cover:
 | category_id   | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
+## Association
+
+belongs_to :user
+has_many :excuse_tag_relations
+has_many :tags, through: :excuse_tag_relations
+
 
 ## tags テーブル
 
@@ -55,6 +65,10 @@ Things you may want to cover:
 | id           | references | null: false, foreign_key: true |
 | name         | references | null: false, foreign_key: true |
 
+## Association
+
+has_many :excuse_tag_relations
+has_many :excuses, through: :excuse_tag_relations
 
 
 ## excuse_tag_relations テーブル
@@ -63,3 +77,8 @@ Things you may want to cover:
 | ------------ | ---------- | ------------------------------ |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
+
+## Association
+
+  belongs_to :excuse
+  belongs_to :tag
